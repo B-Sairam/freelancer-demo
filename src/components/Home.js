@@ -95,14 +95,14 @@ const Home = () => {
     {
       project.length?project.filter((e)=>e.clientId===user._id).map((e)=>{
         return <div key={e._id} className="card ">
-        <div class="card-body">
-           <h5 class="card-title fs-5 pb-2 fw-bold">{e.title}</h5>
-           <p class="card-text"><b>Description:</b> <span className=' text-secondary'>{e.descrip}</span></p>
-           <p class="card-text"><b>Technology: </b><span className='badge bg-danger'>{e.tech}</span></p>
-           <p class="card-text"><span className='fw-bold'>Price: </span>Rs.{e.price}</p>
+        <div className="card-body">
+           <h5 className="card-title fs-5 pb-2 fw-bold">{e.title}</h5>
+           <p className="card-text"><b>Description:</b> <span className=' text-secondary'>{e.descrip}</span></p>
+           <p className="card-text"><b>Technology: </b><span className='badge bg-danger'>{e.tech}</span></p>
+           <p className="card-text"><span className='fw-bold'>Price: </span>Rs.{e.price}</p>
          </div>
-         <div class="card-foot">
-           <p class="bg-primary p-2 text-white text-center">Delivery In {e.dedline}</p>
+         <div className="card-foot">
+           <p className="bg-primary p-2 text-white text-center">Delivery In {e.dedline}</p>
          </div>
         </div>
         
@@ -117,14 +117,14 @@ const Home = () => {
     {
       project.length?project.map((e)=>{
         return <div key={e._id} className="card ">
-        <div class="card-body">
-           <h5 class="card-title fs-5 pb-2 fw-bold">{e.title}</h5>
-           <p class="card-text"><b>Description:</b> <span className=' text-secondary'>{e.descrip}</span></p>
-           <p class="card-text"><b>Technology: </b><span className='badge bg-danger'>{e.tech}</span></p>
-           <p class="card-text"><span className='fw-bold'>Price: </span>Rs.{e.price}</p>          
-           <p class="card-text"><span className='fw-bold'>Delivery In: </span>{e.dedline}</p>
+        <div className="card-body">
+           <h5 className="card-title fs-5 pb-2 fw-bold">{e.title}</h5>
+           <p className="card-text"><b>Description:</b> <span className=' text-secondary'>{e.descrip}</span></p>
+           <p className="card-text"><b>Technology: </b><span className='badge bg-danger'>{e.tech}</span></p>
+           <p className="card-text"><span className='fw-bold'>Price: </span>Rs.{e.price}</p>          
+           <p className="card-text"><span className='fw-bold'>Delivery In: </span>{e.dedline}</p>
          </div>
-         <div class="card-foot">
+         <div className="card-foot">
          <button className='btn btn-primary bg-primary text-center' onClick={()=>apply(e)}>Apply</button>
          </div>
         </div>

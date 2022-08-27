@@ -1,6 +1,5 @@
 import { useToast } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
-import { DataState } from '../context/Provider';
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constant';
 import axios from 'axios';

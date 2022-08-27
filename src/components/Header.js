@@ -1,7 +1,7 @@
 import { Avatar, Button, Menu, MenuButton, MenuItem, MenuList, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DataState } from '../context/Provider';
 
 const Header = () => {
