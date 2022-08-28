@@ -25,7 +25,7 @@ const Header = () => {
   return <>
     <div className='head'>
     <div>
-        <h1 class="navbar-brand fs-2 text-dark">Freelancer</h1>
+        <h1 class="navbar-brand fs-2 text-dark">Freelancing:(</h1>
     </div>
     <div>
 
@@ -38,9 +38,9 @@ const Header = () => {
                  </MenuButton>
                  <MenuList>
                    <MenuItem onClick={()=>setProfileview(true)}> My Profile</MenuItem>
-                   {/* {
-                     user.userType=="client"?<MenuItem onClick={()=>navigate('/admin')}>Project applied</MenuItem>:""
-                   } */}
+                   {
+                     user.userType==="customer"?<MenuItem onClick={()=>navigate('/applies')}>View Applied</MenuItem>:""
+                   }
                     <MenuItem onClick={()=>logout()}>LogOut</MenuItem>
                  
                  {

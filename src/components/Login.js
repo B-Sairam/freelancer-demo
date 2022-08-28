@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constant';
 import { DataState } from '../context/Provider';
  
@@ -96,7 +96,7 @@ const Login = () => {
   return <>
   <div className='container'>
     <div className='login-box'>
-      <p className='title'>Freelancer</p>
+      <p className='title'>Freelancing:(</p>
     <div className="form-floating mb-3">
     <input type={'email'} value={email} className="form-control" id="floatingInput"onChange={(e)=>setEmail(e.target.value)} placeholder="name@example.com"/>
     <label for="floatingInput">Email address</label>
@@ -110,9 +110,7 @@ const Login = () => {
         &nbsp;<label className="form-check-label" for="flexCheckDefault">
           Show Password 
       </label></div>
-      <p  className="text-primary" onClick={()=>{
-        navigate('/register')
-      }}>Create new account</p>
+      <Link to='/register'  className="text-primary">Create new account</Link>
       
    </div>
    <div className='d-grid col-5 mx-auto mt-4'>

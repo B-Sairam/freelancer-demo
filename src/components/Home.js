@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './Header';
 import { BASE_URL } from '../constant';
 import { useToast } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const {user}= DataState();
@@ -15,6 +16,7 @@ const Home = () => {
   const [dedline,setDedline]=useState('');
   const [loading,setLoading]=useState(false);
   const [project,setProject] = useState([]);
+  const [task,setTask]   = useState([]);
   const toast = useToast();
 
 
@@ -26,7 +28,9 @@ const Home = () => {
   const getData = async()=>{
     try {
       let {data} = await axios.get(`${BASE_URL}getProject`)
-      setProject(data.message);
+      let temp = data.message.filter((e)=>e.clientId===user._id);
+      setProject(temp);
+      setTask(data.message);
     } catch (error) {
       toast({
         title:error.response.data,
@@ -82,18 +86,53 @@ const Home = () => {
   }
 
   const apply = async(e)=>{
-    console.log(e);
+    let project,clientId,freelancerId,freelancerName;
+    project = e.title;
+    clientId = e.clientId;
+    freelancerId= user._id;
+    freelancerName= user.name;
+    setLoading(true);
+    try {
+      const config = {
+        headers:{
+          "Content-type":"application/json",
+        }
+      }
+      await axios.post(`${BASE_URL}apply`,{project,clientId,freelancerId,freelancerName},config)
+      toast({
+        title:"Project Apply successfully",
+        status:"success",
+        duration:3000,
+        isClosable:true,
+        position:"top"
+    });
+    setLoading(false)
+    setPop(false)
+    } catch (error) {
+      setLoading(false)
+      toast({
+        title:error.response.data,
+        status:"error",
+        duration:3000,
+        isClosable:true,
+        position:"top"
+    });
+    }
+    
   }
   return <>
   <Header/>
   {
     user.userType==="customer"?<div className='client'>
-    <div>
+    <div className='d-flex justify-content-between'>
       <button className='btn btn-primary m-2'onClick={()=>setPop(true)}>Create project   <i class="fa-solid fa-plus"></i></button>
+      <Link to="/applies" className='btn btn-warning m-2'>View Applied</Link>
+
     </div>
-    <div className='project-list'>
+   
+    <div className='project-list '>
     {
-      project.length?project.filter((e)=>e.clientId===user._id).map((e)=>{
+      project.length?project.map((e)=>{
         return <div key={e._id} className="card ">
         <div className="card-body">
            <h5 className="card-title fs-5 pb-2 fw-bold">{e.title}</h5>
@@ -106,16 +145,16 @@ const Home = () => {
          </div>
         </div>
         
-      }):<h1 className='display-5 text-center'>Project not yet created</h1>
+      }):<h1 className='display-6 text-center pt-5'>Projects not Found</h1>
      }
     </div>
   </div> 
   :
   <div className='freelancer'>
-     <h1 className='display-6 p-3 text-secondary'>Order to work ({project.length})</h1>
+     <h1 className='display-6 p-3 text-secondary'>Projects to work ({task.length})</h1>
      <div className='project-list'>
     {
-      project.length?project.map((e)=>{
+      task.length?task.map((e)=>{
         return <div key={e._id} className="card ">
         <div className="card-body">
            <h5 className="card-title fs-5 pb-2 fw-bold">{e.title}</h5>
@@ -125,7 +164,9 @@ const Home = () => {
            <p className="card-text"><span className='fw-bold'>Delivery In: </span>{e.dedline}</p>
          </div>
          <div className="card-foot">
-         <button className='btn btn-primary bg-primary text-center' onClick={()=>apply(e)}>Apply</button>
+         <button className='btn btn-primary bg-primary text-center' onClick={()=>window.confirm(`Are you confirm for appling ${e.title}`)?apply(e):""}>
+          Apply
+         </button>
          </div>
         </div>
         

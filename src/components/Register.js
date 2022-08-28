@@ -86,7 +86,7 @@ const Register = () => {
   return <>
   <div className='container'>
     <div className='login-box'>
-      <p className='title'>Freelancer</p>
+      <p className='title'>Freelancing:(</p>
       <div className="form-floating mb-3">
     <input type={'email'} value={name} className="form-control" id="floatingName"onChange={(e)=>setName(e.target.value)} placeholder="Name" />
     <label for="floatingName">Name</label>
